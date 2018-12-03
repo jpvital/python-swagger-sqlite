@@ -39,7 +39,10 @@ It's possible to test these functionalities using the UI tool provided with this
 
 I started by drawing the database structure's diagram in db_diagram.png . It needed to allow for enough abstraction that it is not dependent on the manufacturer's industry or the types of products that they store.
 
-Next, I defined the contracts for the API and wrote its documentation in a swagger file using https://editor.swagger.io/. I then generated the server's skeleton using the same swagger file. The generated server already handles the validation layer in a way that respects the contracts defined in the swagger file, and contains code stubs for the controllers. All I had to do was complete the controllers and define the database layer using Flask and SqlAlchemy (see 'db' folder). the db_config.py script contains the database schema based on the database diagram. The helpers.py script contain methods to read and save products to the database, and to convert a json payload to the database structure and vice-versa.
+Next, I defined the contracts for the API and wrote its documentation in a swagger file using https://editor.swagger.io/. I then generated the server's skeleton using the same swagger file.
+The generated server already handles the validation layer in a way that respects the contracts defined in the swagger file, and contains code stubs for the controllers. All I had to do was complete the controllers and define the database layer using Flask and SqlAlchemy (see 'db' folder).
+the db_config.py script contains the database schema based on the database diagram.
+The helpers.py script contain methods to read and save products to the database, and to convert a json payload to the database structure and vice-versa.
 
 ## How to test
 In the swagger-ui browser interface, click 'Products' to expand the two existing endpoints, then click on the one you wish to test. the test/mocks folder contains two payload examples (the two files which name ends with 'post') can be used to create resources. The manufacturer is identified in the X_API_KEY box. Please note that only manufacturer names 'food' and 'textile' will work, others will trigger a 404 response. Also note the example column to the right to see how a valid payload looks like.
