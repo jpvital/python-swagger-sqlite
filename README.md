@@ -47,6 +47,8 @@ The db_config.py script contains the database schema based on the database diagr
 The helpers.py script contain methods to read and save products to the database, and to convert a json payload to the database structure and vice-versa.
 
 ## How to test
-In the swagger-ui browser interface, click 'Products' to expand the two existing endpoints, then click on the one you wish to test. the test/mocks folder contains two payload examples (the two files which name ends with 'post') can be used to create resources. The manufacturer is identified in the X_API_KEY box. Please note that only manufacturer names 'food' and 'textile' will work, others will trigger a 404 response. Also note the example column to the right to see how a valid payload looks like.
+In the swagger-ui browser interface, click 'Products' to expand the two existing endpoints, then click on the one you wish to test. the test/mocks folder contains two payload examples (the two files which name ends with 'post') can be used to create resources.
+
+The manufacturer is identified in the X_API_KEY box. Please note that only manufacturer names 'food' and 'textile' will work, others will trigger a 404 response. Also note the example column to the right to see how a valid payload looks like.
 
 Note that the database is currently created from scratch every time the service is ran, and by default will only contain two default manufacturers.
