@@ -8,7 +8,7 @@ This example uses the [Connexion](https://github.com/zalando/connexion) library 
 The generated server runs inside a docker container.
 
 ## Requirements
-Python 3.6 +
+Python 3.5 +
 
 ## Usage
 To run the server, please execute the following from the root directory:
