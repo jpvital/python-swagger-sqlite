@@ -1,0 +1,53 @@
+[
+  {
+    "id": 0,
+    "name": "Chorizo",
+    "family": "sausage",
+    "tags": [
+      "spicy",
+      "spanish"
+    ],
+    "allergens": [
+      "cereals"
+    ],
+    "customer": "Deans Butchers",
+    "billOfMaterials": {
+      "paprika": {
+        "quantity": 100,
+        "units": "tablespoons"
+      },
+      "pork mince": {
+        "quantity": 10,
+        "units": "kg"
+      }
+    }
+  },
+  {
+    "id": 1,
+    "name": "Mighty Hamburgers",
+    "family": "burgers",
+    "tags": [
+      "BBQ"
+    ],
+    "allergens": [
+      "cereals",
+      "eggs",
+      "sesame"
+    ],
+    "customer": "Sainsburys",
+    "billOfMaterials": {
+      "minced beef": {
+        "quantity": 56.3,
+        "units": "kg"
+      },
+      "onions": {
+        "quantity": 15,
+        "units": "kg"
+      },
+      "breadcrumbs": {
+        "quantity": 12,
+        "units": "cups"
+      }
+    }
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "id": 0,
+    "name": "Tweed Jacket",
+    "colour": "Maroon",
+    "range": "Grandad Chic",
+    "tags": [
+      "mens",
+      "smart",
+      "suits"
+    ],
+    "billOfMaterials": {
+      "Maroon wool": {
+        "quantity": 100,
+        "units": "metres"
+      },
+      "Silk lining": {
+        "quantity": 10,
+        "units": "square metres"
+      }
+    }
+  },
+  {
+    "id": 1,
+    "name": "Plain T",
+    "colour": "Ocean Blue",
+    "range": "Normal",
+    "tags": [
+      "mens",
+      "casual"
+    ],
+    "billOfMaterials": {
+      "Cotton": {
+        "quantity": 0.5,
+        "units": "kilograms"
+      },
+      "Print": {
+        "quantity": 1,
+        "units": null
+      },
+      "Thread": {
+        "quantity": 23,
+        "units": "metres"
+      },
+      "Water": {
+        "quantity": 0.4,
+        "units": "litres"
+      }
+    }
+  }
+]

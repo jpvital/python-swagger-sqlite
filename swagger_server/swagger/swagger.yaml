@@ -1,0 +1,84 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a sample factory inventory product management server."
+  version: "1.0.0"
+  title: "Factory product management"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "joao.campos18@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/products-api"
+schemes:
+- "https"
+- "http"
+paths:
+  /products:
+    get:
+      tags:
+      - "products"
+      summary: "Finds products by factory"
+      description: ""
+      operationId: "get_products"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "X_API_KEY"
+        in: "header"
+        description: "Name of the manufacturer (eg 'textils', 'food')"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+      x-swagger-router-controller: "swagger_server.controllers.products_controller"
+    post:
+      tags:
+      - "products"
+      summary: "Add a new product to a factory's inventory."
+      description: ""
+      operationId: "post_products"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "X_API_KEY"
+        in: "header"
+        description: "Name of the manufacturer (eg 'textils', 'food')"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "List of product objects to be added to the inventory."
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/Product"
+      responses:
+        200:
+          description: "Products created."
+        400:
+          description: "Invalid input."
+        404:
+          description: "Factory not found."
+        409:
+          description: "Duplicate product."
+      x-swagger-router-controller: "swagger_server.controllers.products_controller"
+definitions:
+  Product:
+    type: "object"
+    example:
+      name: Fluffy
+      billOfMaterials: {Cotton: { quantity: 1, units: 'meters' }}
+    description: "An object containing all properties of a product. May contain an optional key called 'billOfMaterials'. Its value must contain strings as keys, and objects with keys 'quantity' and 'units'."
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
