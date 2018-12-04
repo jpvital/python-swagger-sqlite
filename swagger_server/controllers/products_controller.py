@@ -1,10 +1,7 @@
 import connexion
 from flask import request
-import six
 
 from swagger_server.models.product import Product  # noqa: E501
-from swagger_server.models.product_create import ProductCreate  # noqa: E501
-from swagger_server import util
 from ..db.helpers import insert_products, select_products
 
 
@@ -35,6 +32,6 @@ def post_products(body):  # noqa: E501
     :rtype: None
     """
     if connexion.request.is_json:
-        body = [ProductCreate.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
+        body = [Product.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
         manufacturer_name = request.headers.get('X_API_KEY')
         insert_products(manufacturer_name, body)

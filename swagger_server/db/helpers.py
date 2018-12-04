@@ -1,3 +1,5 @@
+import sqlalchemy
+
 from .db_config import (
     Product,
     ProductMaterial,
@@ -8,8 +10,6 @@ from .db_config import (
 from ..shared import DB
 from ..errors.errors import NotFoundException, DuplicateItemException
 
-import sqlalchemy
-
 # # Get the top-level logger object
 # log = logging.getLogger()
 
@@ -19,33 +19,33 @@ import sqlalchemy
 
 def json_2_db(payload: [dict]) -> [Product]:
     products = []
-    for p in payload:
-        new_product = Product(name=p['name'], manufacturer=p['manufacturer'])
-        del p['name']
-        del p['manufacturer']
-        
+    for _p in payload:
+        new_product = Product(name=_p['name'], manufacturer=_p['manufacturer'])
+        del _p['name']
+        del _p['manufacturer']
+
         #bill of materials
-        if 'billOfMaterials' in p.keys():
-            for m in p['billOfMaterials'].keys():
+        if 'billOfMaterials' in _p.keys():
+            for _m in _p['billOfMaterials'].keys():
                 new_material = ProductMaterial(
-                    name=m,
-                    quantity=p['billOfMaterials'][m]['quantity'],
-                    units=p['billOfMaterials'][m]['units']
+                    name=_m,
+                    quantity=_p['billOfMaterials'][_m]['quantity'],
+                    units=_p['billOfMaterials'][_m]['units']
                 )
                 new_product.bill_of_materials.append(new_material)
-            del p['billOfMaterials']
+            del _p['billOfMaterials']
 
-        for k in p.keys():
+        for k in _p.keys():
             #product property group
-            if type(p[k])==list:
+            if isinstance(_p[k], list):
                 new_property_group = ProductPropertyGroup(name=k)
                 #product property group elements
-                for elem in p[k]:
+                for elem in _p[k]:
                     new_property_group.elements.append(ProductPropertyGroupElement(name=elem))
                 new_product.product_property_groups.append(new_property_group)
             #product property
             else:
-                new_property = ProductProperty(name=k, value=p[k])
+                new_property = ProductProperty(name=k, value=_p[k])
                 new_product.product_properties.append(new_property)
         products.append(new_product)
     return products
@@ -59,14 +59,14 @@ def db_2_json(products: [Product]) -> [dict]:
         #product properties
         for prop in unparsed_item.product_properties:
             new_product[prop.name] = prop.value
-        
+
         #product materials
         new_product['billOfMaterials'] = {}
         for mat in unparsed_item.bill_of_materials:
             new_product['billOfMaterials'][mat.name] = {}
             new_product['billOfMaterials'][mat.name]['quantity'] = mat.quantity
             new_product['billOfMaterials'][mat.name]['units'] = mat.units
-        
+
         #product property groups
         for group in unparsed_item.product_property_groups:
             elements = [e.name for e in group.elements]
@@ -75,20 +75,20 @@ def db_2_json(products: [Product]) -> [dict]:
         parsed_products.append(new_product)
     return parsed_products
 
-def insert_products(manufacturer:str, products:[dict]) -> None:
+def insert_products(manufacturer: str, products: [dict]) -> None:
     for unparsed_item in products:
         unparsed_item['manufacturer'] = manufacturer
 
     parsed_products = json_2_db(products)
-    for p in parsed_products:
-        p.manufacturer = manufacturer
-        DB.session.add(p)
+    for _p in parsed_products:
+        _p.manufacturer = manufacturer
+        DB.session.add(_p)
     try:
         DB.session.commit()
-    except sqlalchemy.exc.IntegrityError as e:
-        if 'FOREIGN' in str(e):
+    except sqlalchemy.exc.IntegrityError as _e:
+        if 'FOREIGN' in str(_e):
             raise NotFoundException(message='Could not find manufacturer.')
-        elif 'UNIQUE' in str(e):
+        elif 'UNIQUE' in str(_e):
             raise DuplicateItemException(message='Product name must be unique per manufacturer')
 
 def select_products(manufacturer):

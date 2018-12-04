@@ -88,7 +88,7 @@ class ProductPropertyGroupElement(BASE_MODEL):
     def __repr__(self):
         return self.name
 
-manufacturer_default_data = [
+MANUFACTURER_DEFAULT_DATA = [
     Manufacturer(name='textile', industry='textile'),
     Manufacturer(name='food', industry='food')
 ]
@@ -96,6 +96,7 @@ manufacturer_default_data = [
 def create_database():
     DB.drop_all()
     DB.create_all()
-    for m in manufacturer_default_data:
-        DB.session.add(m)
+    for _m in MANUFACTURER_DEFAULT_DATA:
+        DB.session.add(_m)
     DB.session.commit()
+    

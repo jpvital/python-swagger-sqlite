@@ -14,4 +14,3 @@ APP.app.config['SQLALCHEMY_ECHO'] = True
 APP.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 APP.add_error_handler(NotFoundException, error_handler)
 APP.add_error_handler(DuplicateItemException, error_handler)
-
