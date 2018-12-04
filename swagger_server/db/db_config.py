@@ -5,8 +5,6 @@ from ..shared import DB
 BASE_MODEL = DB.Model
 
 class Manufacturer(BASE_MODEL):
-    #name
-    #industry
     __tablename__ = 'manufacturer'
     name = Column(String(50), unique=True, nullable=False, primary_key=True)
     industry = Column(String(50), nullable=False,)
@@ -32,10 +30,9 @@ class Product(BASE_MODEL):
         return self.name
 
 class ProductMaterial(BASE_MODEL):
-    #product_id
-    #name
-    #quantity
-    #units
+    """this table contains all the values seen in the billOfMaterials
+    field in the JSON payloads"""
+
     __tablename__ = 'productMaterial'
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
@@ -47,9 +44,9 @@ class ProductMaterial(BASE_MODEL):
         return self.name
 
 class ProductProperty(BASE_MODEL):
-    #product_id
-    #name
-    #value
+    """this table stores all the key-value pairs in the top
+    level of the JSON payload"""
+
     __tablename__ = 'productProperty'
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
@@ -60,9 +57,9 @@ class ProductProperty(BASE_MODEL):
         return self.name
 
 class ProductPropertyGroup(BASE_MODEL):
-    #product_id
-    #name
-    #type
+    """this table stores the names of the fields
+    which contain lists of values in the JSON payload"""
+
     __tablename__ = 'productPropertyGroup'
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
@@ -74,8 +71,7 @@ class ProductPropertyGroup(BASE_MODEL):
         return self.name
 
 class ProductPropertyGroupElement(BASE_MODEL):
-    #product_property_group_id
-    #name
+    """This table stores all the values inside those lists"""
     __tablename__ = 'propertyGroupElement'
     id = Column(Integer, primary_key=True)
     product_property_group_id = Column(
