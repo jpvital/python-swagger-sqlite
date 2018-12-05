@@ -18,6 +18,7 @@ from ..errors.errors import NotFoundException, DuplicateItemException
 # log.addHandler(console)
 
 def json_2_db(payload: [dict]) -> [Product]:
+    """Convert the incoming payload into a format accepted by the database"""
     products = []
     for _p in payload:
         new_product = Product(name=_p['name'], manufacturer=_p['manufacturer'])
@@ -51,6 +52,8 @@ def json_2_db(payload: [dict]) -> [Product]:
     return products
 
 def db_2_json(products: [Product]) -> [dict]:
+    """Convert the result of a database query into a dictionary
+    to be returned to the user in JSON format"""
     parsed_products = []
     for unparsed_item in products:
         new_product = {}
@@ -76,6 +79,7 @@ def db_2_json(products: [Product]) -> [dict]:
     return parsed_products
 
 def insert_products(manufacturer: str, products: [dict]) -> None:
+    """Save a list of new products into the database"""
     for unparsed_item in products:
         unparsed_item['manufacturer'] = manufacturer
 
@@ -92,5 +96,6 @@ def insert_products(manufacturer: str, products: [dict]) -> None:
             raise DuplicateItemException(message='Product name must be unique per manufacturer')
 
 def select_products(manufacturer):
+    """Retrieve a manufacturers products"""
     products = DB.session.query(Product).filter_by(manufacturer=manufacturer)
     return db_2_json(products)
