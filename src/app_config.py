@@ -1,6 +1,5 @@
 import connexion, os
 from src import encoder
-from flask_sqlalchemy import SQLAlchemy
 from .errors.errors import NotFoundException, DuplicateItemException, error_handler
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
