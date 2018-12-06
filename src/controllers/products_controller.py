@@ -1,7 +1,7 @@
 import connexion
 from flask import request
 
-from swagger_server.models.product import Product  # noqa: E501
+from src.models.product import Product  # noqa: E501
 from ..db.helpers import insert_products, select_products
 
 

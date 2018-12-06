@@ -37,7 +37,7 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Product"
-      x-swagger-router-controller: "swagger_server.controllers.products_controller"
+      x-swagger-router-controller: "src.controllers.products_controller"
     post:
       tags:
       - "products"
@@ -71,7 +71,7 @@ paths:
           description: "Factory not found."
         409:
           description: "Duplicate product."
-      x-swagger-router-controller: "swagger_server.controllers.products_controller"
+      x-swagger-router-controller: "src.controllers.products_controller"
 definitions:
   Product:
     type: "object"

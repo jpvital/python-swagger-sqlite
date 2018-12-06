@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import os
 from flask import json
 
-from swagger_server.test import BaseTestCase
+from src.test import BaseTestCase
 
 from ..app_config import BASE_DIR
 MOCKS_DIR = os.path.join(BASE_DIR, 'test/mocks')

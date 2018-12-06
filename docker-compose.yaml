@@ -1,6 +1,6 @@
 version: '2'
 services:
-    swagger_server:
+    src:
         build: .
         ports:
             - "8080:8080"

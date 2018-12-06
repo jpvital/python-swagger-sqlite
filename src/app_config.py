@@ -1,5 +1,5 @@
 import connexion, os
-from swagger_server import encoder
+from src import encoder
 from flask_sqlalchemy import SQLAlchemy
 from .errors.errors import NotFoundException, DuplicateItemException, error_handler
 
